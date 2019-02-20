@@ -78,3 +78,39 @@ print("Diameter for largest component: ", nx.diameter(subgraph))
 
 triadic_closure = nx.transitivity(G)
 print("Triadic Closure is ", triadic_closure)
+
+degree_dictionary = dict(G.degree(G.nodes()))
+for d in degree_dictionary:
+    print(d, degree_dictionary[d])
+
+nx.set_node_attributes(G, degree_dictionary, 'degree')
+
+print(G.node['William Penn'])
+
+sorted_degree_dic = sorted(degree_dictionary.items(), key=itemgetter(1), reverse=True)
+
+print("Getting nodes with top 20 degree")
+
+for node in sorted_degree_dic[:20]:
+    print(node)
+
+
+betweenness_dic = nx.betweenness_centrality(G)
+#print(betweenness_dic)
+eignevector_dic = nx.eigenvector_centrality(G)
+
+nx.set_node_attributes(G, betweenness_dic, 'betweenness')
+nx.set_node_attributes(G, eignevector_dic, 'eigenvector')
+
+
+sorted_betweenness = sorted(betweenness_dic.items(), key=itemgetter(1), reverse=True)
+print("Top 20 nodes with betweenness")
+
+for node in sorted_betweenness[:20]:
+    print(node)
+
+top_betweenness = sorted_betweenness[:20]
+
+for b_node in top_betweenness:
+    degree = degree_dictionary[b_node[0]]
+    print("Name : ", b_node[0], " | Betweenness Centrality : ", b_node[1], " Degree : ", degree)
