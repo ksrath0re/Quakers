@@ -5,10 +5,10 @@ import community
 
 
 with open('quakers_nodelist.csv', 'r') as nodecsv:
-    #Read the CSV file
+#    #Read the CSV file
     nodereader = csv.reader(nodecsv)
-    #Retrieve the data
-    #print(nodereader)
+#    #Retrieve the data
+#   #print(nodereader)
     nodes = [n for n in nodereader][1:]
     print(nodes)
     node_names = [n[0] for n in nodes]
@@ -16,12 +16,12 @@ with open('quakers_nodelist.csv', 'r') as nodecsv:
 
 
 with open('quakers_edgelist.csv','r') as edgecsv:
-    #Read the CSV file
+#   #Read the CSV file
     edgereader = csv.reader(edgecsv)
     edges = [tuple(e) for e in edgereader][1:]
     print('\n')
     print(len(edges))
-    #print(edges)
+#    #print(edges)
 
 
 G = nx.Graph()
@@ -54,3 +54,27 @@ nx.set_node_attributes(G, id_dic, 'ID')
 
 for node in G.nodes():
     print(node, G.node[node]['Birth_Year'])
+
+density = nx.density(G)
+print("Network Density is : ", density)
+
+Ann_William_Path = nx.shortest_path(G, source="Anne Camm", target="William Mead")
+print("Shortest path between Ann and William", Ann_William_Path)
+
+
+fell_whitehead_path = nx.shortest_path(G, source="Margaret Fell", target="George Whitehead")
+print("Shortest path between Fell and Whitehead", fell_whitehead_path)
+
+#print(nx.diameter(G))
+
+print("Is Graph connected: ", nx.is_connected(G))
+
+components= nx.connected_components(G)
+largest_component = max(components, key=len)
+
+subgraph = G.subgraph(largest_component)
+
+print("Diameter for largest component: ", nx.diameter(subgraph))
+
+triadic_closure = nx.transitivity(G)
+print("Triadic Closure is ", triadic_closure)
