@@ -3,6 +3,7 @@ import networkx as nx
 from operator import itemgetter
 import community
 from networkx.readwrite import json_graph
+import json
 
 
 with open('quakers_nodelist.csv', 'r') as nodecsv:
@@ -160,4 +161,8 @@ for k,v in modularity.items():
 
 nx.write_gexf(G, "quaker_network.gexf")
 
+data = json_graph.node_link_data(G)
+#print(data)
 
+s = json.dumps(data)
+#print(s)
