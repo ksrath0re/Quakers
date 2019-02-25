@@ -2,10 +2,11 @@ import csv
 import networkx as nx
 from operator import itemgetter
 import community
+from networkx.readwrite import json_graph
 
 
 with open('quakers_nodelist.csv', 'r') as nodecsv:
-#    #Read the CSV file
+    #Read the CSV file
     nodereader = csv.reader(nodecsv)
 #    #Retrieve the data
 #   #print(nodereader)
@@ -15,8 +16,8 @@ with open('quakers_nodelist.csv', 'r') as nodecsv:
     print(len(node_names))
 
 
-with open('quakers_edgelist.csv','r') as edgecsv:
-#   #Read the CSV file
+with open('quakers_edgelist.csv', 'r') as edgecsv:
+    #Read the CSV file
     edgereader = csv.reader(edgecsv)
     edges = [tuple(e) for e in edgereader][1:]
     print('\n')
@@ -114,3 +115,49 @@ top_betweenness = sorted_betweenness[:20]
 for b_node in top_betweenness:
     degree = degree_dictionary[b_node[0]]
     print("Name : ", b_node[0], " | Betweenness Centrality : ", b_node[1], " Degree : ", degree)
+
+
+communities = community.best_partition(G)
+
+for community_ in communities:
+    print(community_, communities[community_])
+
+sorted_community = sorted(communities.items(), key=itemgetter(1), reverse=True)
+
+print(sorted_community)
+
+for community_, community_class in sorted_community:
+    print(community_, community_class)
+#print(communities)
+nx.set_node_attributes(G, communities, 'modularity')
+
+#Now let's get the community of class value 2 nodes
+
+community_class_2 = [n for n in G.nodes() if G.node[n]['modularity'] == 2]
+
+#Create a dictionary of eigenvector centrality for those nodes
+class_2_eignevector = {n:G.node[n]['eigenvector'] for n in community_class_2}
+
+class_2_sorted_eignevector = sorted(class_2_eignevector.items(), key=itemgetter(1), reverse=True)
+
+print("Modularity class 2 sorted by Eigenvector centrality")
+for node in class_2_sorted_eignevector[:5]:
+    print("Name : ", node[0], " | Eigenvector_centrality :", node[1])
+
+
+modularity = {}
+
+for k,v in communities.items():
+    if v not in modularity:
+        modularity[v] = [k]
+    else:
+        modularity[v].append(k)
+
+for k,v in modularity.items():
+    if len(v)>2:
+        print("Class " , str(k), ":", v)
+
+
+nx.write_gexf(G, "quaker_network.gexf")
+
+
