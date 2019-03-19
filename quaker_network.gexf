@@ -14,7 +14,7 @@
     </attributes>
     <meta>
       <creator>NetworkX 2.2</creator>
-      <lastmodified>25/02/2019</lastmodified>
+      <lastmodified>19/03/2019</lastmodified>
     </meta>
     <nodes>
       <node id="Joseph Wyeth" label="Joseph Wyeth">
@@ -547,7 +547,7 @@
           <attvalue for="5" value="2" />
           <attvalue for="6" value="0.0" />
           <attvalue for="7" value="0.05742927075071555" />
-          <attvalue for="8" value="3" />
+          <attvalue for="8" value="4" />
         </attvalues>
       </node>
       <node id="Benjamin Furly" label="Benjamin Furly">
@@ -950,7 +950,7 @@
           <attvalue for="5" value="7" />
           <attvalue for="6" value="0.014689610452322314" />
           <attvalue for="7" value="0.1909539378268105" />
-          <attvalue for="8" value="3" />
+          <attvalue for="8" value="4" />
         </attvalues>
       </node>
       <node id="Richard Hubberthorne" label="Richard Hubberthorne">

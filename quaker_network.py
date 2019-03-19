@@ -165,4 +165,6 @@ data = json_graph.node_link_data(G)
 #print(data)
 
 s = json.dumps(data)
-#print(s)
+print(s)
+with open('s.json', 'w') as outfile:
+    json.dump(s, outfile)
