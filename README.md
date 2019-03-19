@@ -7,3 +7,4 @@ developed by  [Thomas Aynaud ](https://github.com/taynaud)
 pip install -U git+https://github.com/taynaud/python-louvain.git
 
 Issue faced : AttributeError: 'Graph' object has no attribute 'edges_iter'
+follow https://github.com/taynaud/python-louvain/issues/3 for more deatails.
