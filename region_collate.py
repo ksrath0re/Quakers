@@ -33,7 +33,7 @@ region_4_data = []
 for root, dirs, files in os.walk(dir):
     #print('Root :',root,' dirs : ',dirs, ' files :',files)
 
-    if dirs and dirs[0] == 'CB-Results' and root.split('\\')[-1:][0] in r:
+    if dirs and dirs[0] == 'CB-Results':
         plant_name = root.split('\\')[-1:][0]
         if plant_name in region_1:
             region_1_data.append(returnDataFrame(root, plant_name))
