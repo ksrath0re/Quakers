@@ -57,12 +57,22 @@ graphs = {}
 i = 0
 for k, v in region_edges.items():
     k  = k.replace('_edges','')
+
     graph = nx.Graph()
     graph.add_nodes_from(roles_set)
     graph.add_weighted_edges_from(v)
+    degree_dictionary = dict(graph.degree(graph.nodes()))
+    nx.set_node_attributes(graph, degree_dictionary, 'degree')
+    #sorted_degree_dic = sorted(degree_dictionary.items(), key=itemgetter(1), reverse=True)
+
+    #print("Getting nodes with top 20 degree")
+
+    # for node in sorted_degree_dic[:20]:
+    #     print(node)
     print("for Graph ", k, nx.info(graph))
     print('---------------------------------------------')
     graphs[k] = graph
+
     data = json_graph.node_link_data(graph)
     # print(data)
 

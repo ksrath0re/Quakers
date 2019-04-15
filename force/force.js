@@ -25,7 +25,12 @@ d3.json("force/force.json", function (error, graph) {
         .selectAll("circle")
         .data(graph.nodes)
         .enter().append("circle")
-        .attr("r", 5)
+        .attr("r", function(d) {
+        if (d.degree >= 20 ){return 15}
+        else if (d.degree < 20 && d.degree >= 16) {return 12}
+        else if (d.degree < 16 && d.degree > 9) {return 10}
+        else return d.degree;
+  })
         .call(d3.drag()
             .on("start", dragstarted)
             .on("drag", dragged)
