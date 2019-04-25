@@ -1,0 +1,14 @@
+binarize the connection or not
+
+give class name and add color
+color represents the centrality
+
+color code with class
+
+
+use class from taxonomy (discuss with Trixy)
+
+intensity value / category value
+
+#Later Stage -
+can we use clusteritng here with nodes (based on modularity score)

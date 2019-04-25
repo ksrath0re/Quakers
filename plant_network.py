@@ -43,6 +43,8 @@ files = {
 }
 
 region_edges = {}
+class_dict = {}
+
 roles_set = set()
 for k,v in files.items():
     region_file_name = k + '_edges'
@@ -52,6 +54,13 @@ for k,v in files.items():
     region_edges[region_file_name] = aggregatedEdges
     roles_set |= roles
 
+supervisor_roles = ['Work_control_supervisor', 'operations_manager','shift_supervisor', 'supervisor','fire_watch_sup','CR_shift_supervisor', 'assistant_shift_sup','plant_manager','maintenance_sup','shift_manager','team_lead','control_room_sup','s_reactor_operator','CR_supervisor','operations_sup']
+for role in roles_set:
+    if role in supervisor_roles:
+        class_dict[role] = 1
+    else:
+        class_dict[role] = 0
+print(class_dict)
 
 graphs = {}
 i = 0
@@ -63,6 +72,7 @@ for k, v in region_edges.items():
     graph.add_weighted_edges_from(v)
     degree_dictionary = dict(graph.degree(graph.nodes()))
     nx.set_node_attributes(graph, degree_dictionary, 'degree')
+    nx.set_node_attributes(graph, class_dict, 'class')
     #sorted_degree_dic = sorted(degree_dictionary.items(), key=itemgetter(1), reverse=True)
 
     #print("Getting nodes with top 20 degree")

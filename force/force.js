@@ -16,6 +16,10 @@ d3.json("force/force.json", function (error, graph) {
 
     var link = svg.append("g")
         .attr("class", "links")
+//        .attr('fill', 'red')
+//        .attr('stroke', 'red')
+//        //.attr('stroke-width', function(d) { return d.weight; })
+//        .attr("stroke-width", function(d) { return  d.weight;})
         .selectAll("line")
         .data(graph.links)
         .enter().append("line");
@@ -25,6 +29,12 @@ d3.json("force/force.json", function (error, graph) {
         .selectAll("circle")
         .data(graph.nodes)
         .enter().append("circle")
+        .style("fill", function(d) {
+        if (d.class == 1)
+        return 'red'
+        else
+        return 'blue';
+  })
         .attr("r", function(d) {
         if (d.degree >= 20 ){return 15}
         else if (d.degree < 20 && d.degree >= 16) {return 12}
