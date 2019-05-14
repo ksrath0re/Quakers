@@ -1,21 +1,23 @@
 // This is adapted from https://bl.ocks.org/mbostock/2675ff61ea5e063ede2b5d63c08020c7
 
-var svg1 = d3.select("#svg1"),
-    width = +svg1.attr("width"),
-    height = +svg1.attr("height");
+var chart3 = d3.select("#area3")
+.append(svg3)
 
-//d3.select('body').append('svg1')
-var simulation = d3.forceSimulation(svg1)
+var svg3 = d3.select("#svg3"),
+    width = +svg2.attr("width"),
+    height = +svg2.attr("height");
+
+var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function (d) {
         return d.id;
     }))
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
 
-d3.json("force/force.json", function (error, graph) {
+d3.json("force/region_2_old.json", function (error, graph) {
     if (error) throw error;
 
-    var link = svg1.append("g")
+    var link = svg2.append("g")
         .attr("class", "links")
 //        .attr('fill', 'red')
 //        .attr('stroke', 'red')
@@ -25,7 +27,7 @@ d3.json("force/force.json", function (error, graph) {
         .data(graph.links)
         .enter().append("line");
 
-    var node = svg1.append("g")
+    var node = svg2.append("g")
         .attr("class", "nodes")
         .selectAll("circle")
         .data(graph.nodes)

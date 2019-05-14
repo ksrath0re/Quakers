@@ -83,7 +83,7 @@ for k, v in region_edges.items():
     print('---------------------------------------------')
     graphs[k] = graph
 
-    data = json_graph.node_link_data(graph)
+    #data = json_graph.node_link_data(graph)
     # print(data)
 
     # r = json.dumps(data)
@@ -92,21 +92,38 @@ for k, v in region_edges.items():
     # with open(fileName, 'w') as outfile:
     #     json.dump(r, outfile)
     #i +=1
-    json.dump(data, open('force/force.json', 'w'))
-    print('Wrote node-link JSON data to force/force.json')
+    # json.dump(data, open('force/force.json', 'w'))
+    # print('Wrote node-link JSON data to force/force.json')
+    #
+    # # Serve the file over http to allow for cross origin requests
+    # app = flask.Flask(__name__, static_folder="force")
+    #
+    #
+    # @app.route('/')
+    # def static_proxy():
+    #     return app.send_static_file('force.html')
+    #
+    #
+    # print('\nGo to http://localhost:8000 to see the example\n')
+    # app.run(port=8000)
 
-    # Serve the file over http to allow for cross origin requests
-    app = flask.Flask(__name__, static_folder="force")
-
-
-    @app.route('/')
-    def static_proxy():
-        return app.send_static_file('force.html')
-
-
-    print('\nGo to http://localhost:8000 to see the example\n')
-    app.run(port=8000)
-
-    break
+    #break
 
 print(graphs)
+
+for graph, graphdata in graphs.items():
+    filename = 'force/'+graph+'.json'
+    jsondata = json_graph.node_link_data(graphdata)
+    json.dump(jsondata, open(filename, 'w'))
+    print('Wrote node-link JSON data to force/force.json')
+
+app = flask.Flask(__name__, static_folder="force")
+
+
+@app.route('/')
+def static_proxy():
+    return app.send_static_file('force.html')
+
+
+print('\nGo to http://localhost:8000 to see the example\n')
+app.run(port=8000)

@@ -2,11 +2,22 @@
 <html>
   <head>
     <title>Force-Directed Layout</title>
-    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+    <!--<script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>-->
     <link type="text/css" rel="stylesheet" href="force/force.css"/>
   </head>
   <body>
-    <svg width="960" height="600"></svg>
+  <!--<div class="test">-->
+  <div id="first">
+    <script type="text/javascript"></script>
+    <svg width="600" height="600" id="svg1"></svg>
+    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
     <script type="text/javascript" src="force/force.js"></script>
+    </div>
+  <div id="second">
+  <svg width="600" height="600" id="svg2"></svg>
+    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+    <script type="text/javascript" src="force/force2.js"></script>
+    </div>
+    <!--</div>-->
   </body>
 </html>
