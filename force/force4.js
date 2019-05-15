@@ -1,34 +1,34 @@
 // This is adapted from https://bl.ocks.org/mbostock/2675ff61ea5e063ede2b5d63c08020c7
 
-var svg3 = d3.select("#svg3"),
-    width = +svg3.attr("width"),
-    height = +svg3.attr("height");
+var svg4 = d3.select("#svg4"),
+    width = +svg4.attr("width"),
+    height = +svg4.attr("height");
 
-//d3.select('body').append('svg3')
-var simulation3 = d3.forceSimulation(svg3)
+//d3.select('body').append('svg4')
+var simulation4 = d3.forceSimulation(svg4)
     .force("link", d3.forceLink().id(function (d) {
         return d.id;
     }))
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
 
-d3.json("force/region_3_old.json", function (error, graph3) {
+d3.json("force/region_4_old.json", function (error, graph4) {
     if (error) throw error;
 
-    var link = svg3.append("g")
+    var link = svg4.append("g")
         .attr("class", "links")
 //        .attr('fill', 'red')
 //        .attr('stroke', 'red')
 //        //.attr('stroke-width', function(d) { return d.weight; })
 //        .attr("stroke-width", function(d) { return  d.weight;})
         .selectAll("line")
-        .data(graph3.links)
+        .data(graph4.links)
         .enter().append("line");
 
-    var node = svg3.append("g")
+    var node = svg4.append("g")
         .attr("class", "nodes")
         .selectAll("circle")
-        .data(graph3.nodes)
+        .data(graph4.nodes)
         .enter().append("circle")
         .style("fill", function(d) {
         if (d.class == 1)
@@ -43,21 +43,21 @@ d3.json("force/region_3_old.json", function (error, graph3) {
         else return d.degree;
   })
         .call(d3.drag()
-            .on("start", dragstarted3)
-            .on("drag", dragged3)
-            .on("end", dragended3));
+            .on("start", dragstarted4)
+            .on("drag", dragged4)
+            .on("end", dragended4));
 
     node.append("title")
         .text(function (d) {
             return d.id;
         });
 
-    simulation3
-        .nodes(graph3.nodes)
+    simulation4
+        .nodes(graph4.nodes)
         .on("tick", ticked);
 
-    simulation3.force("link")
-        .links(graph3.links);
+    simulation4.force("link")
+        .links(graph4.links);
 
     function ticked() {
         link
@@ -84,19 +84,19 @@ d3.json("force/region_3_old.json", function (error, graph3) {
     }
 });
 
-function dragstarted3(d) {
-    if (!d3.event.active) simulation3.alphaTarget(0.3).restart();
+function dragstarted4(d) {
+    if (!d3.event.active) simulation4.alphaTarget(0.3).restart();
     d.fx = d.x;
     d.fy = d.y;
 }
 
-function dragged3(d) {
+function dragged4(d) {
     d.fx = d3.event.x;
     d.fy = d3.event.y;
 }
 
-function dragended3(d) {
-    if (!d3.event.active) simulation3.alphaTarget(0);
+function dragended4(d) {
+    if (!d3.event.active) simulation4.alphaTarget(0);
     d.fx = null;
     d.fy = null;
 }

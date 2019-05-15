@@ -14,7 +14,7 @@ var simulation2 = d3.forceSimulation(svg2)
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
 
-d3.json("force/region_1_old.json", function (error, graph2) {
+d3.json("force/region_2_old.json", function (error, graph2) {
     if (error) throw error;
 
     var link = svg2.append("g")

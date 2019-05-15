@@ -12,7 +12,7 @@ var simulation = d3.forceSimulation(svg1)
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
 
-d3.json("force/force.json", function (error, graph) {
+d3.json("force/region_1_old.json", function (error, graph) {
     if (error) throw error;
 
     var link = svg1.append("g")
@@ -52,6 +52,16 @@ d3.json("force/force.json", function (error, graph) {
             return d.id;
         });
 
+//    var label = svg1.selectAll("nodes")
+//    .data(graph.nodes)
+//    .enter()
+//    .append("text")
+//    .text(function (d) { return d.id; })
+//    .style("text-anchor", "middle")
+//    .style("fill", "#555")
+//    .style("font-family", "Arial")
+//    .style("font-size", 9);
+
     simulation
         .nodes(graph.nodes)
         .on("tick", ticked);
@@ -81,6 +91,9 @@ d3.json("force/force.json", function (error, graph) {
             .attr("cy", function (d) {
                 return d.y;
             });
+
+//        label.attr("x", function(d){ return d.x; })
+//    			 .attr("y", function (d) {return d.y - 10; });
     }
 });
 
